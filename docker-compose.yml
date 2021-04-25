@@ -1,0 +1,13 @@
+version: '3'
+services:
+  test-database:
+    image: postgres:13.2
+    volumes:
+      - .db.tmp:/var/lib/pgsql/data:Z
+    ports:
+      - '5433:5432'
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: dev
+      POSTGRES_DB: stage
