@@ -53,7 +53,7 @@ export class CategoriesService {
     });
     const result = [];
     Object.values(treesByOrigins).map((treeByOrigin: any) => {
-      result.push(this.buildSingleRootTreeFromSql(treeByOrigin));
+      result.push(...this.buildSingleRootTreeFromSql(treeByOrigin));
     });
     return result;
   }
