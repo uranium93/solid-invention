@@ -18,7 +18,10 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "migration": "npx sequelize-cli db:migrate",
+    "seed:generate": "npx sequelize-cli seed:generate",
+    "seed": "tsc && NODE_ENV=test npx sequelize-cli db:seed:all"
   },
   "dependencies": {
     "@nestjs/common": "^7.6.15",
@@ -32,6 +35,7 @@
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.6",
     "sequelize": "^6.6.2",
+    "sequelize-cli": "^6.2.0",
     "sequelize-typescript": "^2.1.0"
   },
   "devDependencies": {
@@ -69,9 +73,14 @@
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "collectCoverageFrom": [
-      "**/*.(t|j)s"
+      "**/*.(t|j)s",
+      "!**/*.module.ts",
+      "!main.ts"
     ],
     "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "moduleNameMapper": {
+      "^src/(.*)$": "<rootDir>/$1"
+    }
   }
 }
