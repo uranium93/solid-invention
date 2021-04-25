@@ -74,7 +74,7 @@ export class CategoriesService {
         treeLevels[level - 1][node.parent_id].nodes.push(node);
       });
     }
-    return Object.values(treeLevels[1]);
+    return Object.values(treeLevels[1] || []);
   }
 
   async getFullCategoryTreeRows() {
