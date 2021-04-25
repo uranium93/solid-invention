@@ -39,6 +39,16 @@ export class CategoriesService {
     private categoriesModel: typeof Categories,
   ) {}
 
+
+  async getFullCategoryTreeRows() {
+    return this.categoriesModel.sequelize.query<FullCategoriesTreeQueryResult>(
+      getFullCategoriesTreeQuery(),
+      {
+        type: QueryTypes.SELECT,
+      },
+    );
+  }
+
   async getCategoryTreeRowsByRootId(rootId: number) {
     return this.categoriesModel.sequelize.query<FullCategoriesTreeQueryResult>(
       getCategoryTreeByRootIdQuery(rootId),
